@@ -40,3 +40,9 @@ echo "$currDate | ssh file generated"
 
 currDate=`date +%D-%T`
 echo "$currDate | script finished your ip is: $ip"
+
+
+
+
+
+# Hallo maya
