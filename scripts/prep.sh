@@ -14,34 +14,41 @@ SDCardBoot=K: # The SDCard Partition called "boot"
 currDate=`date +%D-%T`
 echo "$currDate | script started..."
 
+#error handling
+function handleError()
+{
+    currDate=`date +%D-%T`
+    echo "$currDate | CRITICAL ERROR - Abording..."
+    exit 0
+}
+
+#removing new line char of file
+truncate -s -1 $SDCardBoot/cmdline.txt
+
 # enabling cgroup_memory
-#echo -n "cgroup_memory=1 cgroup_enable=memory" >> $SDCardBoot/cmdline.txt
+echo -n " cgroup_memory=1 cgroup_enable=memory" >> $SDCardBoot/cmdline.txt || handleError
 
 currDate=`date +%D-%T`
 echo "$currDate | cgroup enabled"
 
 #setting ip, gateway ...
-echo -n " ip=$ip::$gateway:$subnetmask:$hostname:$interface:off" >> $SDCardBoot/cmdline.txt
-
 currDate=`date +%D-%T`
-echo "$currDate | network settings set"
+echo -n " ip=$ip::$gateway:$subnetmask:$hostname:$interface:off" >> $SDCardBoot/cmdline.txt || handleError
 
 #enabling arm64
-echo "arm_64bit=1" >> $SDCardBoot/config.txt
+echo "arm_64bit=1" >> $SDCardBoot/config.txt || handleError
 
 currDate=`date +%D-%T`
 echo "$currDate | enabled arm64"
 
 #enabling ssh
-touch $SDCardBoot/ssh
+touch $SDCardBoot/ssh || handleError
 
 currDate=`date +%D-%T`
 echo "$currDate | ssh file generated"
 
 currDate=`date +%D-%T`
 echo "$currDate | script finished your ip is: $ip"
-
-
 
 
 
