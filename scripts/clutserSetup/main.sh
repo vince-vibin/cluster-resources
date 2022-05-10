@@ -20,13 +20,28 @@ function masterSetup() {
     currDate=`date +%D-%T`
     echo "$currDate | connecting to master $masterIP"
 
-    putty.exe -ssh -pw $masterPassword pi@$masterIP -m ./masterSetup.sh | handleError
+    putty.exe -ssh -pw $masterPassword pi@$masterIP -m ./masterSetup.sh 
 
     currDate=`date +%D-%T`
     echo "$currDate | master finished $masterIP"
 }
 
+function nodeSetup() {
+    currDate=`date +%D-%T`
+    echo "$currDate | connecting to worker $workersIP"
+
+    for i in "${workersIP[@]}"
+    do 
+        putty.exe -ssh -pw $masterPassword pi@$workersIP[0] -m ./nodeSetup.sh
+    done
+
+    currDate=`date +%D-%T`
+    echo "$currDate | worker finished $workersIP"
+}
+
 currDate=`date +%D-%T`
 echo "$currDate | script started..."
 
-masterSetup | handleError
+masterSetup
+
+nodeSetup
