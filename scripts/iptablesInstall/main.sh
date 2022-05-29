@@ -1,10 +1,12 @@
 #!/bin/bash
 
-# This script is sshing into all the servers an executing the neede commands to setup the cluser
-# It also intalls IP legacy tables
-# cluster config: 1 master + workers
+#! ------- currently this script doesnt work because the install needs special input ---
 
-# --- WARNING: All the nodes + the master will be rebootet ---
+#* This script is sshing into all the servers an executing the neede commands to setup the cluser
+#* It also intalls IP legacy tables
+#* cluster config: 1 master + workers
+
+#! --- WARNING: All the nodes + the master will be rebootet ---
 
 masterIP="192.168.178.200"
 masterPassword="raspberry"

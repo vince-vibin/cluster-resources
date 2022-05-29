@@ -1,7 +1,7 @@
 #!/bin/bash
 
-#This script is used after installing the OS on the SDCard.
-#It will give the pi an IP, enable arm64, cgroup_memory and setup ssh.
+#* This script is used after installing the OS on the SDCard.
+#* It will give the pi an IP, enable arm64, cgroup_memory and setup ssh.
 
 ip=192.168.178.203
 gateway=192.168.178.1
