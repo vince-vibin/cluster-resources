@@ -35,7 +35,6 @@ function ssh() {
 
 for i in "${workersIP[@]}"
 do
-    echo "########################### $c "
     ssh ${workersIP[$c]} ${workersPasswords[$c]} ${workersUser[$c]} ${nodeName[$c]}
     ((c=c+1))
 done
