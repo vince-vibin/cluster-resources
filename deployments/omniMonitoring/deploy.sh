@@ -18,4 +18,7 @@ sed -i "s|<your-organization-here>|$ORG|" ./omni/omni-install.yaml
 sed -i "s|<your-organization-here>|$ORG|" ./omni/omni-install.yaml
 sed -i "s|5|$DATA_RATE|" ./omni/omni-install.yaml
 
+
+kubectl apply -f ./omni/omni-install.yaml
+
 sleep 5
