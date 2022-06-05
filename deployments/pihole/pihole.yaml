@@ -1,0 +1,19 @@
+---
+persistentVolumeClaim:
+  enabled: true
+ingress:
+  enabled: true
+serviceTCP:
+  loadBalancerIP: '192.168.178.202'
+  type: LoadBalancer
+serviceUDP:
+  loadBalancerIP: '192.168.178.202'
+  type: LoadBalancer
+resources:
+  limits:
+    cpu: 200m
+    memory: 256Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+adminPassword: 0n4BQ2l7Dbu3ViYgd4wu
