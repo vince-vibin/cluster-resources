@@ -1,19 +1,27 @@
 ---
 persistentVolumeClaim:
   enabled: true
-ingress:
-  enabled: true
-serviceTCP:
-  loadBalancerIP: '192.168.178.202'
+
+serviceWeb:
+  http:
+    enabled: true
+    port: 80
+  https:
+    enabled: true
+    port: 443
+  type: ClusterIP
+  externalTrafficPolicy: Local
+  loadBalancerIP: 192.168.178.201
   type: LoadBalancer
-serviceUDP:
-  loadBalancerIP: '192.168.178.202'
+
+serviceDNS:
+  loadBalancerIP: 192.168.178.202
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
   type: LoadBalancer
-resources:
-  limits:
-    cpu: 200m
-    memory: 256Mi
-  requests:
-    cpu: 100m
-    memory: 128Mi
-adminPassword: 0n4BQ2l7Dbu3ViYgd4wu
+
+serviceDhcp:
+  loadBalancerIP: 192.168.178.203
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
+  type: LoadBalancer
