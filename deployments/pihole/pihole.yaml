@@ -3,19 +3,13 @@ persistentVolumeClaim:
   enabled: true
 
 serviceWeb:
-  http:
-    enabled: true
-    port: 80
-  https:
-    enabled: true
-    port: 443
-  type: ClusterIP
-  externalTrafficPolicy: Local
-  loadBalancerIP: 192.168.178.201
+  loadBalancerIP: 192.168.178.210
+  annotations:
+    metallb.universe.tf/allow-shared-ip: pihole-svc
   type: LoadBalancer
 
-serviceDNS:
-  loadBalancerIP: 192.168.178.202
+serviceDns:
+  loadBalancerIP: 192.168.178.252
   annotations:
     metallb.universe.tf/allow-shared-ip: pihole-svc
   type: LoadBalancer
