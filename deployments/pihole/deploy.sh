@@ -13,5 +13,6 @@ kubectl create namespace pihole
 kubectl delete -n kube-system helmcharts traefik
 
 helm install --version '2.5.8' --namespace pihole --values values.yaml pihole mojo2600/pihole
+
 # uninstall command:
 # helm uninstall pihole -n pihole
