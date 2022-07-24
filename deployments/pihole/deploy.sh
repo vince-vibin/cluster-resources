@@ -12,7 +12,7 @@ kubectl create namespace pihole
 # issue open at: https://github.com/MoJo2600/pihole-kubernetes/issues/230
 kubectl delete -n kube-system helmcharts traefik
 
-helm install --version '2.5.8' --namespace pihole --values values.yaml pihole mojo2600/pihole
+helm install --version '2.9.0' --namespace pihole --values values.yaml pihole mojo2600/pihole
 
 # uninstall command:
 # helm uninstall pihole -n pihole
