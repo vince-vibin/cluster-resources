@@ -4,19 +4,33 @@ BUCKET="rpc"
 ORG="vincent.sternad@meconema.de"
 DATA_RATE="10" # determins how often data is send to the database
 
-# installing needed resscources
-sudo apt update -y
-sudo apt install -y git
-sudo apt install -y libseccomp2
+function handleError() {
+    currDate=`date +%D-%T`
+    echo "$currDate | CRITICAL ERROR - " $1
+    exit 0
+}
 
-git clone https://github.com/mattogodoy/omni.git
+{
+    # installing needed resscources
+    sudo apt update -y || handleError
+    sudo apt install -y git || handleError
+    sudo apt install -y libseccomp2 || handleError
+} || {
+    handleError "Error while trying to install needed ressources"
+}
 
-sed -i "s|<your-url-here>|$URL|" ./omni/omni-install.yaml
-sed -i "s|<your-token-here>|$TOKEN|" ./omni/omni-install.yaml
-sed -i "s|<your-bucket-here>|$BUCKET|" ./omni/omni-install.yaml
-sed -i "s|<your-organization-here>|$ORG|" ./omni/omni-install.yaml
-sed -i "s|<your-organization-here>|$ORG|" ./omni/omni-install.yaml
-sed -i "s|5|$DATA_RATE|" ./omni/omni-install.yaml
 
+git clone https://github.com/mattogodoy/omni.git || handleError "Error while trying to clone omni repository"
 
-kubectl apply -f ./omni/omni-install.yaml
+{
+    sed -i "s|<your-url-here>|$URL|" ./omni/omni-install.yaml
+    sed -i "s|<your-token-here>|$TOKEN|" ./omni/omni-install.yaml 
+    sed -i "s|<your-bucket-here>|$BUCKET|" ./omni/omni-install.yaml 
+    sed -i "s|<your-organization-here>|$ORG|" ./omni/omni-install.yaml 
+    sed -i "s|<your-organization-here>|$ORG|" ./omni/omni-install.yaml 
+    sed -i "s|5|$DATA_RATE|" ./omni/omni-install.yaml
+} || { 
+    handleError "Error while trying to write in config file"
+}
+
+kubectl apply -f ./omni/omni-install.yaml || handleError "Error while trying to apply omni-install.yaml"

@@ -11,7 +11,7 @@ function handleError() {
 currDate=`date +%D-%T`
 echo "$currDate | connecting to master $masterIP"
 
-putty.exe -ssh -pw $masterPassword $masterUser@$masterIP -m ./install.sh 
+putty.exe -ssh -pw $masterPassword $masterUser@$masterIP -m ./install.sh || handleError
 
 currDate=`date +%D-%T`
 echo "$currDate | installed helm $masterIP"
