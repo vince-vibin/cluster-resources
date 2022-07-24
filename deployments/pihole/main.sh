@@ -20,7 +20,7 @@ currDate=`date +%D-%T`
 echo "$currDate | connecting to master $masterIP"
 
 #sed -i "s|LOAD_BALANCER_SERVER_IP_HERE|$loadbalancerIP|" ./pihole.yaml
-sed -i "s|<your-password-here>|$piholePassword|" ./values.yaml
+#sed -i "s|<your-password-here>|$piholePassword|" ./values.yaml
 
 pscp -q -pw $masterPassword ./values.yaml $masterUser@$masterIP:/home/$masterUser || handleError
 putty.exe -ssh -pw $masterPassword $masterUser@$masterIP -m ./deploy.sh || handleError
