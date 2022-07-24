@@ -1,6 +1,6 @@
 
 master="192.168.178.200"
-TOKEN="K10a505283e310837762bf2e04164a7c6feedf0bb1e5f38622f44fa6d5c2ae3b1c6::server:891496d47db022ede3ef256851eba924"
+TOKEN="K10d05374993ed983232cc1b27576d8b77803a0817a666e53468f8e1db207e5a0f0::server:adb16a42ee059fd6fc32488bdcddf787"
 
 workersIP=("192.168.178.201" "192.168.178.202" "192.168.178.203")
 workersPasswords=("raspberry" "raspberry" "raspberry")
@@ -18,11 +18,6 @@ function ssh() {
     password=$2
     user=$3
     nodeName=$4
-
-    echo $ip
-    echo $password
-    echo $user
-    echo $nodeName
 
     currDate=`date +%D-%T`
     echo "$currDate | connecting to $ip as $user"
