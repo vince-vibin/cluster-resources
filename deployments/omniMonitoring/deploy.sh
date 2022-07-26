@@ -2,7 +2,7 @@ URL="https://eu-central-1-1.aws.cloud2.influxdata.com"
 TOKEN="l-hLPh-gesbsHk88MyXmdkvWfwZ7vUvax7UKtX9sjvJk_a_u01stxY8c6CBalji9uafu_gw8QW38KZzNVNlhUw=="
 BUCKET="rpc"
 ORG="vincent.sternad@meconema.de"
-DATA_RATE="10" # determins how often data is send to the database
+DATA_RATE="10" # determins how often data is send to the database (in seconds)
 
 function handleError() {
     currDate=`date +%D-%T`

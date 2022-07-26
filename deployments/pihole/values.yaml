@@ -1,4 +1,7 @@
 ---
+replicaCount: 4
+maxSurge: 6
+
 extraEnvVars: {
   DNSMASQ_USER: "root"
 }
@@ -10,29 +13,27 @@ persistentVolumeClaim:
   enabled: true
 
 serviceWeb:
-  loadBalancerIP: 192.168.178.201
   annotations:
     metallb.universe.tf/allow-shared-ip: pihole-svc
   type: LoadBalancer
 
 serviceDns:
-  loadBalancerIP: 192.168.178.201
   annotations:
     metallb.universe.tf/allow-shared-ip: pihole-svc
   type: LoadBalancer
 
 serviceDhcp:
-  loadBalancerIP: 192.168.178.201
   annotations:
     metallb.universe.tf/allow-shared-ip: pihole-svc
   type: LoadBalancer
 
+#* This are the public dns of dns.watch feel free to change it :)
 podDnsConfig:
   enabled: true
   policy: "None"
   nameservers:
-  - 127.0.0.1
-  - 8.8.8.8
+  - 84.200.69.80
+  - 84.200.70.40
 
 #! use an existing secret in a prod env
 adminPassword: "0n4BQ2l7Dbu3ViYgd4wu"

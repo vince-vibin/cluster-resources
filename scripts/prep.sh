@@ -3,10 +3,10 @@
 #* This script is used after installing the OS on the SDCard.
 #* It will give the pi an IP, enable arm64, cgroup_memory and setup ssh.
 
-ip=192.168.178.203
+ip=192.168.178.201
 gateway=192.168.178.1
 subnetmask=225.255.255.0
-hostname=donatelloWorker3
+hostname=rpcworker1
 interface=eth0
 
 SDCardBoot=K: # The SDCard Partition called "boot"
