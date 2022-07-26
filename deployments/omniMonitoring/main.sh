@@ -12,3 +12,5 @@ currDate=`date +%D-%T`
 echo "$currDate | connecting to master $masterIP"
 
 putty.exe -ssh -pw $masterPassword $masterUser@$masterIP -m ./deploy.sh || handleError
+
+echo "$currDate | sucessfully deployed pihole"
