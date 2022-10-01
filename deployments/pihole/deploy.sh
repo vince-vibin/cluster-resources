@@ -21,7 +21,7 @@ kubectl create namespace pihole || handleError
 
 # disabling traefic to not conflict with pihole this should be a temporary fix
 # issue open at: https://github.com/MoJo2600/pihole-kubernetes/issues/230
-#kubectl delete -n kube-system helmcharts traefik || handleError
+kubectl delete -n kube-system helmcharts traefik || handleError
 
 helm install --version '2.9.0' --namespace pihole --values values.yaml pihole mojo2600/pihole || handleError
 

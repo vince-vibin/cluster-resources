@@ -1,6 +1,6 @@
 
 master="192.168.178.200"
-TOKEN="K10d05374993ed983232cc1b27576d8b77803a0817a666e53468f8e1db207e5a0f0::server:adb16a42ee059fd6fc32488bdcddf787"
+TOKEN="K10c0ce7162f3e964388e8e8e21ef9629ce6fdd6540c9678c856a07b4abbe87b95a::server:5dd73d4005fbbae054ae91316883e1cd"
 
 workersIP=("192.168.178.201" "192.168.178.202" "192.168.178.203")
 workersPasswords=("raspberry" "raspberry" "raspberry")
