@@ -1,7 +1,8 @@
 name: ansible-lint
 on:
-  pull_request:
-    branches: ["stable", "release/v*"]
+  push:
+    branches:
+      - master
 jobs:
   build:
     name: Ansible Lint
