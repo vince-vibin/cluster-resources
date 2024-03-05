@@ -5,6 +5,7 @@
   become: true
 
   tasks:
+<<<<<<< HEAD
   - name: Copy MOTD to remote host
     ansible.builtin.template:
       src: "{{ template_dir }}/motd.j2"
@@ -12,3 +13,12 @@
       owner: root
       group: root
       mode: '0644'
+=======
+    - name: Copy MOTD to remote host
+      ansible.builtin.template:
+        src: "{{ template_dir }}/motd.j2"
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: '0644'
+>>>>>>> ac16810f0bd6cf176d2464338d69b2329db1ca48

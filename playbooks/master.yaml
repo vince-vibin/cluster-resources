@@ -2,7 +2,11 @@
 ---
 - name: Master Playbook
   hosts: rpi_cluster
+<<<<<<< HEAD
   gather_facts: no
+=======
+  gather_facts: true
+>>>>>>> ac16810f0bd6cf176d2464338d69b2329db1ca48
 
 - name: System basic configuration
   ansible.builtin.import_playbook: base.yaml
