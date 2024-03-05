@@ -1,0 +1,14 @@
+# Basic system installation before the cluster installation
+---
+- name: Test Playbook
+  hosts: rpi_cluster
+  become: true
+
+  tasks:
+  - name: Copy MOTD to remote host
+    ansible.builtin.template:
+      src: "{{ template_dir }}/motd.j2"
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: '0644'

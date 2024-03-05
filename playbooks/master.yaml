@@ -1,0 +1,8 @@
+# Master Playbook to controll other playbooks on the raspberry pi cluster
+---
+- name: Master Playbook
+  hosts: rpi_cluster
+  gather_facts: no
+
+- name: System basic configuration
+  ansible.builtin.import_playbook: base.yaml
