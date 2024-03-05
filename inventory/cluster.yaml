@@ -1,12 +1,12 @@
 rpi_cluster:
   hosts:
-    leonardo: 
+    leonardo:
       ansible_host: 192.168.178.200
-    donatello: 
+    donatello:
       ansible_host: 192.168.178.201
-    michelangelo: 
+    michelangelo:
       ansible_host: 192.168.178.202
-    raphaelo: 
+    raphaelo:
       ansible_host: 192.168.178.203
   vars:
     template_dir: ../templates
