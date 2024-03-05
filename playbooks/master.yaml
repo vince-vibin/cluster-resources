@@ -1,0 +1,7 @@
+---
+- name: Master Playbook
+  hosts: rpi_cluster
+  gather_facts: no
+
+- name: System basic configuration
+  ansible.builtin.import_playbook: base.yaml

@@ -1,0 +1,18 @@
+---
+- name: Test Playbook
+  hosts: rpi_cluster
+  become: yes
+
+  tasks: 
+  - name: Print a message
+    ansible.builtin.debug:
+      msg: "Hello, world!"
+
+  - name: Copy MOTD to remote host
+    ansible.builtin.copy:
+      src: ../files/motd
+      dest: /etc/motd
+      owner: root
+      group: root
+      mode: '0644'
+      force: true
