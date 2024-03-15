@@ -14,9 +14,9 @@
     - name: Add Docker Repository
       ansible.builtin.apt_repository:
         filename: docker
-        repo: >
-          "deb [arch={{ architecture }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian
-          {{ ansible_facts['distribution_release'] }} stable"
+        repo: >-
+          deb [arch={{ architecture }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian 
+          {{ ansible_facts['distribution_release'] }} stable
         state: present
 
     - name: Install Dependencies
