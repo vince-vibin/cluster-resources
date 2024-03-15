@@ -1,0 +1,42 @@
+# Master Playbook to controll other playbooks on the raspberry pi cluster
+---
+- name: Docker Installation
+  hosts: rpi_cluster
+  gather_facts: true
+  become: true
+
+  tasks:
+    - name: Add Docker Signing Key
+      ansible.builtin.apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+        state: present
+
+    - name: Add Docker Repository
+      ansible.builtin.apt_repository:
+        filename: docker
+        repo: >
+          "deb [arch={{ architecture }} signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian
+          {{ ansible_facts['distribution_release'] }} stable"
+        state: present
+
+    - name: Install Dependencies
+      ansible.builtin.apt:
+        name:
+          - apt-transport-https
+          - ca-certificates
+          - curl
+          - software-properties-common
+          - python3-pip
+          - virtualenv
+          - python3-setuptools
+        state: present
+
+    - name: Install Docker
+      ansible.builtin.apt:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present

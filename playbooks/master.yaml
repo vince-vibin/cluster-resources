@@ -6,3 +6,6 @@
 
 - name: System basic configuration
   ansible.builtin.import_playbook: base.yaml
+
+- name: Install Docker Dependencies
+  ansible.builtin.import_playbook: docker.yaml
