@@ -1,6 +1,6 @@
 # Basic system installation before the cluster installation
 ---
-- name: Test Playbook
+- name: Basic System Installation
   hosts: rpi_cluster
   become: true
 
@@ -12,3 +12,10 @@
         owner: root
         group: root
         mode: '0644'
+
+    - name: Install Base Packages
+      ansible.builtin.apt:
+        name:
+          - vim
+          - byobu
+        state: present

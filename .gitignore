@@ -1,3 +1,4 @@
 # Double declaration due to vscode apperance bug
 ansible-venv
 ansible-venv/*
+ansible.log
