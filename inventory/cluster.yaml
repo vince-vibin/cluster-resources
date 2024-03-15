@@ -1,5 +1,5 @@
 rpi_cluster:
-  hosts:
+  hosts: # CPU architecture needs to be added because Ansible doesnt get it
     leonardo:
       ansible_host: 192.168.178.200
       architecture: arm64
