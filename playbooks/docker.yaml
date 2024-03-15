@@ -1,4 +1,4 @@
-# Master Playbook to controll other playbooks on the raspberry pi cluster
+# Docker Playbook to install docker and its dependencies
 ---
 - name: Docker Installation
   hosts: rpi_cluster
