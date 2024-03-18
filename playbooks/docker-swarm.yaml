@@ -1,0 +1,20 @@
+# Playbook to initialy setup the docker swarm cluster
+---
+- name: Docker Swarm Setup
+  hosts: rpi_cluster
+  gather_facts: true
+  become: true
+
+  tasks:
+    - name: Setup Master
+      when: cluster_role == "master"
+      community.docker.docker_swarm:
+        state: present
+
+    - name: Add nodes
+      when: cluster_role == "node"
+      community.docker.docker_swarm:
+        state: join
+        advertise_addr: "{{ ansible_host }}"
+        join_token: "{{ swarm_token }}"
+        remote_addrs: [ "{{ hostvars['leonardo']['ansible_host'] }}:2377" ]

@@ -42,7 +42,10 @@
           - docker-compose-plugin
         state: present
 
-    - name: Add User Ansible to Docker Group
+    - name: Add Users to Docker Group
       ansible.builtin.user:
-        name: ansible
+        name: "{{ item }}"
         groups: docker
+      loop:
+        - ansible
+        - vince

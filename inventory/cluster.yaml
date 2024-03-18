@@ -3,14 +3,18 @@ rpi_cluster:
     leonardo:
       ansible_host: 192.168.178.200
       architecture: arm64
+      cluster_role: master
     donatello:
       ansible_host: 192.168.178.201
       architecture: arm64
+      cluster_role: node
     michelangelo:
       ansible_host: 192.168.178.202
       architecture: armhf
+      cluster_role: node
     raphaelo:
       ansible_host: 192.168.178.203
       architecture: armhf
+      cluster_role: node
   vars:
     template_dir: ../templates

@@ -2,3 +2,5 @@
 ansible-venv
 ansible-venv/*
 ansible.log
+*.swp
+vault.yaml
