@@ -1,0 +1,1 @@
+[![ansible-lint](https://github.com/vince-vibin/cluster-resources/actions/workflows/ansible-lint.yml/badge.svg)](https://github.com/vince-vibin/cluster-resources/actions/workflows/ansible-lint.yml)
