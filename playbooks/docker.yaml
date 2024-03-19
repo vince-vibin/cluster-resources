@@ -48,4 +48,4 @@
         groups: docker
       loop:
         - ansible
-        - vince
+        - "{{ main_user }}"

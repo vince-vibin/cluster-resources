@@ -17,4 +17,4 @@
         state: join
         advertise_addr: "{{ ansible_host }}"
         join_token: "{{ swarm_token }}"
-        remote_addrs: [ "{{ hostvars['leonardo']['ansible_host'] }}:2377" ]
+        remote_addrs: ["{{ hostvars['leonardo']['ansible_host'] }}:2377"]

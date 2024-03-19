@@ -18,3 +18,4 @@ rpi_cluster:
       cluster_role: node
   vars:
     template_dir: ../templates
+    main_user: vince
