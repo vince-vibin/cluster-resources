@@ -9,3 +9,6 @@
 
 - name: Install Docker Dependencies
   ansible.builtin.import_playbook: docker.yaml
+
+- name: Setup Docker Swarm
+  ansible.builtin.import_playbook: docker-swarm.yaml
