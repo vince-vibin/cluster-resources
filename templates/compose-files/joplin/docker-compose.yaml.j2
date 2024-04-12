@@ -12,7 +12,7 @@ services:
       - POSTGRES_DB={{ joplin["pg"]["db"] }}
   app:
     environment:
-      - APP_BASE_URL={{ joplin["app"]["url"] }}:{{ joplin["app"]["port"] }}
+      - APP_BASE_URL={{ joplin["app"]["base_url"] }}
       - APP_PORT=22300
       - POSTGRES_PASSWORD={{ joplin["pg"]["password"] }}
       - POSTGRES_DATABASE={{ joplin["pg"]["db"] }}
@@ -26,9 +26,9 @@ services:
         - db
     ports:
       - "{{ joplin["app"]["port"] }}:{{ joplin["app"]["port"] }}"
-    nginx:
-      image: nginx:1.16.0-alpine
-      volumes:
-        - ./nginx.conf:/etc/nginx/nginx.conf:ro
-      ports:
-        - "{{ joplin["nginx"]["port"] }}:{{ joplin["nginx"]["port"] }}"
+  nginx:
+    image: nginx:1.16.0-alpine
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "{{ joplin["nginx"]["port"] }}:{{ joplin["nginx"]["port"] }}"

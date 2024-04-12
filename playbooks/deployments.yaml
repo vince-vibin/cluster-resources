@@ -1,2 +1,31 @@
-# Playbook for distributing Deployments on Docker Swarm
+# Playbook for distributing Deployments on Docker Swarm or Docker Compose
 ---
+- name: Docker Deployments
+  hosts: rpi_cluster
+  gather_facts: true
+  become: true
+
+  tasks:
+    # Joplin
+    - name: Create Joplin directory
+      ansible.builtin.file:
+        path: /home/ansible/docker-compose/joplin/
+        state: directory
+        mode: '0644'
+
+    - name: Copy compose-files for joplin
+      ansible.builtin.template:
+        src: "{{ item[0] }}"
+        dest: "/home/ansible/docker-compose/joplin/{{ item[1] }}"
+        owner: ansible
+        group: ansible
+        mode: '0644'
+      loop:
+        - ["{{ template_dir }}/compose-files/joplin/docker-compose.yaml.j2", "docker-compose.yaml"]
+        - ["{{ template_dir }}/compose-files/joplin/nginx.conf.j2", "nginx.conf"]
+
+    - name: This command will change the working directory to somedir/
+      when: ansible_facts['nodename'] == "leonardo"
+      ansible.builtin.shell:
+        cmd: docker compose up -d
+        chdir: /home/ansible/docker-compose/joplin/
