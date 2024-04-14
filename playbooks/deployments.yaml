@@ -10,10 +10,10 @@
     - name: Set a Joplin compose direcotry
       set_fact:
         joplin_dir: "/home/ansible/docker-compose/joplin/"
-    
+
     - name: Create Joplin directory
       ansible.builtin.file:
-        path: {{ ansible_facts['joplin_dir'] }}
+        path: "{{ ansible_facts['joplin_dir'] }}"
         state: directory
         mode: '0644'
 
@@ -32,4 +32,4 @@
       when: ansible_facts['nodename'] == "leonardo"
       ansible.builtin.shell:
         cmd: docker compose up -d
-        chdir: {{ ansible_facts['joplin_dir'] }}
+        chdir: "{{ ansible_facts['joplin_dir'] }}"
