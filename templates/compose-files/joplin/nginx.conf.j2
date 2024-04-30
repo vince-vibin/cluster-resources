@@ -1,19 +1,42 @@
-events {
-    worker_connections  1024;
+server {
+    listen {{ joplin["nginx"]["http-port"] }};
+    server_name {{ joplin["app"]["url"] }};
+
+    server_tokens off;
+
+
+    location /.well-known/acme-challenge/ {
+        root /var/www/certbot;
+    }
+
+    location / {
+        proxy_pass http://joplin-app-1:{{ joplin["app"]["port"] }};
+        proxy_set_header Host {{ joplin["app"]["url"] }}:{{ joplin["app"]["port"] }};
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Original-URI $request_uri;
+        proxy_set_header X-Original-Host $http_host;
+    }
 }
 
-http {
-    server {
-        listen 80;
+server {
+    listen {{ joplin["nginx"]["https-port"] }} ssl;
+    server_name {{ joplin["app"]["url"] }};
 
-        location / {
-            proxy_pass http://{{ joplin["app"]["url"] }}:{{ joplin["app"]["port"] }};
-            proxy_set_header Host {{ joplin["app"]["url"] }}:{{ joplin["app"]["port"] }};
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-            proxy_set_header X-Forwarded-Port $server_port;
-            proxy_set_header X-Forwarded-Host $host;
-            client_max_body_size 400M;
-        }
+    ssl_certificate /etc/nginx/ssl/live/{{ joplin["app"]["url"] }}/fullchain.pem;
+    ssl_certificate_key /etc/nginx/ssl/live/{{ joplin["app"]["url"] }}/privkey.pem;
+
+    access_log access.log combined;
+    error_log error.log debug;
+
+    location / {
+        proxy_pass http://joplin-app-1:{{ joplin["app"]["port"] }};
+        proxy_set_header Host {{ joplin["app"]["url"] }}:{{ joplin["app"]["port"] }};
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_set_header X-Original-URI $request_uri;
+        proxy_set_header X-Original-Host $http_host;
     }
 }

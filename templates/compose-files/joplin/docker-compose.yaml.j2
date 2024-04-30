@@ -13,7 +13,7 @@ services:
   app:
     environment:
       - APP_BASE_URL={{ joplin["app"]["base_url"] }}
-      - APP_PORT=22300
+      - APP_PORT={{ joplin["app"]["port"] }}
       - POSTGRES_PASSWORD={{ joplin["pg"]["password"] }}
       - POSTGRES_DATABASE={{ joplin["pg"]["db"] }}
       - POSTGRES_USER={{ joplin["pg"]["user"] }}
@@ -27,8 +27,20 @@ services:
     ports:
       - "{{ joplin["app"]["port"] }}:{{ joplin["app"]["port"] }}"
   nginx:
-    image: nginx:1.16.0-alpine
+    image: nginx:latest
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx.conf:/etc/nginx/conf.d/joplin.conf:ro
+      - ./certbot/conf/:/etc/nginx/ssl/:ro
+      - ./certbot/www/:/var/www/certbot/:ro
+    depends_on:
+      - app
     ports:
-      - "{{ joplin["nginx"]["port"] }}:{{ joplin["nginx"]["port"] }}"
+      - "{{ joplin["nginx"]["http-port"] }}:{{ joplin["nginx"]["http-port"] }}"
+      - "{{ joplin["nginx"]["https-port"] }}:{{ joplin["nginx"]["https-port"] }}"
+  certbot:
+    depends_on:
+      - nginx
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw

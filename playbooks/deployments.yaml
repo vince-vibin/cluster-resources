@@ -8,19 +8,19 @@
   tasks:
     # Joplin
     - name: Set a Joplin compose direcotry
-      set_fact:
+      ansible.builtin.set_fact:
         joplin_dir: "/home/ansible/docker-compose/joplin/"
 
     - name: Create Joplin directory
       ansible.builtin.file:
-        path: "{{ ansible_facts['joplin_dir'] }}"
+        path: "/home/ansible/docker-compose/joplin/"
         state: directory
         mode: '0644'
 
     - name: Copy compose-files for joplin
       ansible.builtin.template:
         src: "{{ item[0] }}"
-        dest: "{{ ansible_facts['joplin_dir'] }}{{ item[1] }}"
+        dest: "/home/ansible/docker-compose/joplin/{{ item[1] }}"
         owner: ansible
         group: ansible
         mode: '0400'
@@ -32,4 +32,4 @@
       when: ansible_facts['nodename'] == "leonardo"
       ansible.builtin.shell:
         cmd: docker compose up -d
-        chdir: "{{ ansible_facts['joplin_dir'] }}"
+        chdir: "/home/ansible/docker-compose/joplin/"
